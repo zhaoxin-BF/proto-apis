@@ -1,0 +1,21 @@
+---
+version: v1
+name: buf.build/expvent/cloud-protos
+deps:
+  - buf.build/googleapis/googleapis
+  - buf.build/grpc-ecosystem/grpc-gateway
+  - buf.build/envoyproxy/protoc-gen-validate
+lint:
+  use:
+    - BASIC
+    - ENUM_VALUE_PREFIX
+    - ENUM_ZERO_VALUE_SUFFIX
+    - FILE_LOWER_SNAKE_CASE
+    # - RPC_REQUEST_RESPONSE_UNIQUE
+    - RPC_REQUEST_STANDARD_NAME
+    # - RPC_RESPONSE_STANDARD_NAME
+    - PACKAGE_VERSION_SUFFIX
+    - SERVICE_SUFFIX
+breaking:
+  use:
+    - FILE

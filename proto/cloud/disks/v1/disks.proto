@@ -1,0 +1,120 @@
+syntax = "proto3";
+package disks.v1;
+option go_package = "github.com/expvent/cloud-apis/golang/disks/v1;disks";
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/field_mask.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "validate/validate.proto";
+import "disks/v1/model.proto";
+
+message CreateDisksRequest{
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "cloud.com/Disk"
+    },
+    (validate.rules).string = {pattern: "^tenants/[^/]+/projects/[^/]+$"}
+  ];
+
+  Disk disk = 2 [
+    (validate.rules).message = {required: true}
+  ];
+  int32 disk_number = 6 [
+    (google.api.field_behavior) = REQUIRED,
+    (validate.rules).int32 = {gte: 1}
+  ];
+}
+message CreateDisksResponse{
+  repeated Disk disks = 1;
+}
+
+message ListDisksRequest{
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "cloud.com/Disk"
+    },
+    (validate.rules).string = {pattern: "^tenants/[^/]+/projects/[^/]+$"}
+  ];
+  int32 page_size = 2;
+  string page_token = 3;
+  string tag_name = 4;
+  string tag_value = 5;
+  string host_id = 6;
+  string mount_status = 7;
+}
+message ListDisksResponse{
+  repeated Disk disks = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+  string next_page_token = 2;
+}
+
+message GetDiskRequest{
+  string name = 1 [
+    (validate.rules).string = {min_len: 1},
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+message GetDiskResponse{
+  Disk disk = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+
+message UpdateDiskRequest{
+  Disk disk = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+message UpdateDiskResponse{
+  Disk disk = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+
+message DeleteDisksRequest{
+  string name = 1 [
+    (validate.rules).string = {min_len: 1},
+    (google.api.field_behavior) = REQUIRED
+  ];
+  bool force = 2;
+}
+message DeleteDisksResponse{
+  uint64 retcode = 1;
+  string msg = 2;
+}
+
+message AttachDiskRequest{
+  string name = 1 [
+    (validate.rules).string = {min_len: 1},
+    (google.api.field_behavior) = REQUIRED
+  ];
+  string host = 2 [
+    (validate.rules).string = {min_len: 1},
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+message AttachDiskResponse{
+  uint64 retcode = 1;
+  string msg = 2;
+}
+
+message DetachDiskRequest{
+  string name = 1 [
+    (validate.rules).string = {min_len: 1},
+    (google.api.field_behavior) = REQUIRED
+  ];
+  string host = 2 [
+    (validate.rules).string = {min_len: 1},
+    (google.api.field_behavior) = REQUIRED
+  ];
+  bool force = 3;
+}
+message DetachDiskResponse{
+  uint64 retcode = 1;
+  string msg = 2;
+}

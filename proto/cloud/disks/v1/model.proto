@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package disks.v1;
+
+import "google/api/field_behavior.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "validate/validate.proto";
+
+
+option go_package = "github.com/expvent/cloud-apis/golang/disks/v1;disks";
+
+message Disk {
+  string name = 1;
+  string mount_point = 3;
+  string project = 4;
+  string replicates = 5;
+  string tenant = 6;
+  string username = 8;
+  int64 create_time = 9;
+  string display_name = 10;
+  string storage_class_name = 11;
+  map <string, string> labels = 12;
+  string namespace = 13;
+  string pvc_name = 14;
+  State state = 15;
+  string disk_type = 16;
+  HostInfo host_info = 17;
+  int64 last_attach_time = 18;
+  int64 last_detch_time = 19;
+  string mount_status = 20;
+}
+
+message HostInfo {
+  string name = 1;
+  string ip = 2;
+  string display_name = 3;
+}
+
+
+enum State {
+  InProduction = 0;
+  Importing = 1;
+  Success = 2;
+  Failed = 3;
+}
+

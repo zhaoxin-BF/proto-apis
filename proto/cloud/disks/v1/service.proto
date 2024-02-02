@@ -1,0 +1,87 @@
+syntax = "proto3";
+package disks.v1;
+option go_package = "github.com/expvent/cloud-apis/golang/disks/v1;disks";
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/field_mask.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "validate/validate.proto";
+import "disks/v1/disks.proto";
+
+service DisksService {
+  rpc CreateDisks(CreateDisksRequest) returns (CreateDisksResponse) {
+    option (google.api.http) = {
+      post: "/disks/v1/disk/{parent=tenants/*/projects/*}"
+      body: "disk"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "create disks"
+      operation_id: "CreateDisks"
+    };
+  };
+
+  rpc ListDisks(ListDisksRequest) returns (ListDisksResponse) {
+    option (google.api.http) = {
+      get: "/disks/v1/disk/{parent=tenants/*/projects/*}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "list disks"
+      operation_id: "ListDisks"
+    };
+  };
+
+  rpc GetDisk(GetDiskRequest) returns (GetDiskResponse) {
+    option (google.api.http) = {
+      get: "/disks/v1/disk/{name=tenants/*/projects/*/disks/*}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "get disk"
+      operation_id: "GetDisk"
+    };
+  };
+
+  rpc UpdateDisk(UpdateDiskRequest) returns (UpdateDiskResponse) {
+    option (google.api.http) = {
+      patch: "/disks/v1/disk/{disk.name=tenants/*/projects/*/disks/*}"
+      body: "disk"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "update disk"
+      operation_id: "UpdateDisk"
+    };
+  };
+
+  rpc DeleteDisk(DeleteDisksRequest) returns (DeleteDisksResponse) {
+    option (google.api.http) = {
+      delete: "/disks/v1/disk/{name=tenants/*/projects/*/disks/*}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "delete disk"
+      operation_id: "DeleteDisk"
+    };
+  };
+
+  rpc AttachDisk(AttachDiskRequest) returns (AttachDiskResponse) {
+    option (google.api.http) = {
+      post: "/disks/v1/attach/{name=tenants/*/projects/*/disks/*}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "attach disk"
+      operation_id: "AttachDisk"
+    };
+  };
+
+  rpc DetachDisk(DetachDiskRequest) returns (DetachDiskResponse) {
+    option (google.api.http) = {
+      post: "/disks/v1/detach/{name=tenants/*/projects/*/disks/*}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "detach disk"
+      operation_id: "DetachDisk"
+    };
+  };
+}

@@ -1,0 +1,543 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "disks/v1/model.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "DisksService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/disks/v1/attach/{name}": {
+      "post": {
+        "summary": "attach disk",
+        "operationId": "AttachDisk",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AttachDiskResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "tenants/[^/]+/projects/[^/]+/disks/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DisksServiceAttachDiskBody"
+            }
+          }
+        ],
+        "tags": [
+          "DisksService"
+        ]
+      }
+    },
+    "/disks/v1/detach/{name}": {
+      "post": {
+        "summary": "detach disk",
+        "operationId": "DetachDisk",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DetachDiskResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "tenants/[^/]+/projects/[^/]+/disks/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DisksServiceDetachDiskBody"
+            }
+          }
+        ],
+        "tags": [
+          "DisksService"
+        ]
+      }
+    },
+    "/disks/v1/disk/{disk.name}": {
+      "patch": {
+        "summary": "update disk",
+        "operationId": "UpdateDisk",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateDiskResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "disk.name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "tenants/[^/]+/projects/[^/]+/disks/[^/]+"
+          },
+          {
+            "name": "disk",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mountPoint": {
+                  "type": "string"
+                },
+                "project": {
+                  "type": "string"
+                },
+                "replicates": {
+                  "type": "string"
+                },
+                "tenant": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "createTime": {
+                  "type": "string",
+                  "format": "int64"
+                },
+                "displayName": {
+                  "type": "string"
+                },
+                "storageClassName": {
+                  "type": "string"
+                },
+                "labels": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "namespace": {
+                  "type": "string"
+                },
+                "pvcName": {
+                  "type": "string"
+                },
+                "state": {
+                  "$ref": "#/definitions/v1State"
+                },
+                "diskType": {
+                  "type": "string"
+                },
+                "hostInfo": {
+                  "$ref": "#/definitions/v1HostInfo"
+                },
+                "lastAttachTime": {
+                  "type": "string",
+                  "format": "int64"
+                },
+                "lastDetchTime": {
+                  "type": "string",
+                  "format": "int64"
+                },
+                "mountStatus": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "DisksService"
+        ]
+      }
+    },
+    "/disks/v1/disk/{name}": {
+      "get": {
+        "summary": "get disk",
+        "operationId": "GetDisk",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetDiskResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "tenants/[^/]+/projects/[^/]+/disks/[^/]+"
+          }
+        ],
+        "tags": [
+          "DisksService"
+        ]
+      },
+      "delete": {
+        "summary": "delete disk",
+        "operationId": "DeleteDisk",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteDisksResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "tenants/[^/]+/projects/[^/]+/disks/[^/]+"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "DisksService"
+        ]
+      }
+    },
+    "/disks/v1/disk/{parent}": {
+      "get": {
+        "summary": "list disks",
+        "operationId": "ListDisks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListDisksResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "parent",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "tenants/[^/]+/projects/[^/]+"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tagName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tagValue",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "hostId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mountStatus",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DisksService"
+        ]
+      },
+      "post": {
+        "summary": "create disks",
+        "operationId": "CreateDisks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateDisksResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "parent",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "tenants/[^/]+/projects/[^/]+"
+          },
+          {
+            "name": "disk",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1Disk"
+            }
+          },
+          {
+            "name": "diskNumber",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "DisksService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "DisksServiceAttachDiskBody": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "host"
+      ]
+    },
+    "DisksServiceDetachDiskBody": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "force": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "host"
+      ]
+    },
+    "v1AttachDiskResponse": {
+      "type": "object",
+      "properties": {
+        "retcode": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateDisksResponse": {
+      "type": "object",
+      "properties": {
+        "disks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Disk"
+          }
+        }
+      }
+    },
+    "v1DeleteDisksResponse": {
+      "type": "object",
+      "properties": {
+        "retcode": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DetachDiskResponse": {
+      "type": "object",
+      "properties": {
+        "retcode": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Disk": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mountPoint": {
+          "type": "string"
+        },
+        "project": {
+          "type": "string"
+        },
+        "replicates": {
+          "type": "string"
+        },
+        "tenant": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "storageClassName": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "pvcName": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/v1State"
+        },
+        "diskType": {
+          "type": "string"
+        },
+        "hostInfo": {
+          "$ref": "#/definitions/v1HostInfo"
+        },
+        "lastAttachTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lastDetchTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "mountStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetDiskResponse": {
+      "type": "object",
+      "properties": {
+        "disk": {
+          "$ref": "#/definitions/v1Disk"
+        }
+      },
+      "required": [
+        "disk"
+      ]
+    },
+    "v1HostInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ListDisksResponse": {
+      "type": "object",
+      "properties": {
+        "disks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Disk"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "disks"
+      ]
+    },
+    "v1State": {
+      "type": "string",
+      "enum": [
+        "InProduction",
+        "Importing",
+        "Success",
+        "Failed"
+      ],
+      "default": "InProduction"
+    },
+    "v1UpdateDiskResponse": {
+      "type": "object",
+      "properties": {
+        "disk": {
+          "$ref": "#/definitions/v1Disk"
+        }
+      },
+      "required": [
+        "disk"
+      ]
+    }
+  }
+}
