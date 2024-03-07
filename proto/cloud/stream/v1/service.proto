@@ -1,0 +1,73 @@
+syntax = "proto3";
+package stream.v1;
+option go_package = "github.com/zhaoxin-BF/proto-apis/golang/stream/v1;stream";
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/field_mask.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "validate/validate.proto";
+
+service StreamService {
+  //服务端流式
+  rpc OrderList(OrderSearchParams) returns (stream OrderListResponse){
+    option (google.api.http) = {
+      get: "/stream/v1/order-list"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "OrderList"
+      operation_id: "OrderList"
+    };
+  };
+
+  //客户端流式
+  rpc UploadFile(stream ImageList) returns (uploadResponse){
+    option (google.api.http) = {
+      post: "/stream/v1/upload-file"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "UploadFile"
+      operation_id: "UploadFile"
+    };
+  };
+
+  //双向流式
+  rpc SumData(stream SumDataRequest) returns (stream SumDataResponse){
+    option (google.api.http) = {
+      post: "/stream/v1/sum-data"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "SumData"
+      operation_id: "SumData"
+    };
+  };
+}
+
+message Order {
+  int32 id = 1;
+  string orderSn = 2;
+  string date = 3;
+}
+message OrderListResponse{
+  Order order = 1;
+}
+message OrderSearchParams {
+}
+message Image{
+  string fileName = 1;
+  string file = 2;
+}
+message ImageList{
+  Image image = 1;
+}
+message uploadResponse{
+}
+message SumDataRequest{
+  int32 number = 1;
+}
+message SumDataResponse{
+  int32 result = 1;
+}

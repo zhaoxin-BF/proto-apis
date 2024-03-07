@@ -1,0 +1,170 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "stream/v1/service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "StreamService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/stream/v1/order-list": {
+      "get": {
+        "summary": "OrderList",
+        "operationId": "OrderList",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1OrderListResponse"
+                }
+              },
+              "title": "Stream result of v1OrderListResponse"
+            }
+          }
+        },
+        "tags": [
+          "StreamService"
+        ]
+      }
+    },
+    "/stream/v1/sum-data": {
+      "post": {
+        "summary": "SumData",
+        "operationId": "SumData",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1SumDataResponse"
+                }
+              },
+              "title": "Stream result of v1SumDataResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SumDataRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StreamService"
+        ]
+      }
+    },
+    "/stream/v1/upload-file": {
+      "post": {
+        "summary": "UploadFile",
+        "operationId": "UploadFile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1uploadResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ImageList"
+            }
+          }
+        ],
+        "tags": [
+          "StreamService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1Image": {
+      "type": "object",
+      "properties": {
+        "fileName": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ImageList": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/v1Image"
+        }
+      }
+    },
+    "v1Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "orderSn": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "v1OrderListResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/v1Order"
+        }
+      }
+    },
+    "v1SumDataRequest": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1SumDataResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1uploadResponse": {
+      "type": "object"
+    }
+  }
+}
