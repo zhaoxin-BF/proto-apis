@@ -1,6 +1,6 @@
 syntax = "proto3";
 package disks.v1;
-option go_package = "github.com/expvent/cloud-apis/golang/disks/v1;disks";
+option go_package = "github.com/zhaoxin-BF/proto-apis/golang/disks/v1;disks";
 
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";

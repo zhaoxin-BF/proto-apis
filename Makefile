@@ -14,16 +14,6 @@ build:
 .PHONY: buf
 buf:
 	buf generate
-#	cd proto/cloud && \
-#	for file in $$(find . -type f -name "buf.gen.yaml" | tr -s "\n" " ");do \
-#		echo "build " $${file}; \
-#		path=$${file%/*}; \
-#		buf generate --template $$file --path $$path; \
-#	done
-#
-#.PHONY: test
-#test:
-#	@bash -c $(buildCommand)
 
 .PHONY: build-proto
 build-proto:
@@ -33,7 +23,3 @@ build-proto:
 		path=$${file%/*}; \
 		buf generate --template $$file --path $$path; \
 	done
-
-.PHONY: test-build
-test-build:
-	cd proto/cloud && buf generate --template ./$(dir)/buf.gen.yaml --path ./$(dir)

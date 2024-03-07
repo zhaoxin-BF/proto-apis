@@ -10,7 +10,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 import "validate/validate.proto";
 
 
-option go_package = "github.com/expvent/cloud-apis/golang/disks/v1;disks";
+option go_package = "github.com/zhaoxin-BF/proto-apis/golang/disks/v1;disks";
 
 message Disk {
   string name = 1;
