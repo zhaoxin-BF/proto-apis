@@ -64,6 +64,8 @@ message ImageList{
   Image image = 1;
 }
 message uploadResponse{
+  string msg = 1;
+  string retcode = 2;
 }
 message SumDataRequest{
   int32 number = 1;

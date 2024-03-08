@@ -164,7 +164,15 @@
       }
     },
     "v1uploadResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "retcode": {
+          "type": "string"
+        }
+      }
     }
   }
 }

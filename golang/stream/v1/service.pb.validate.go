@@ -624,6 +624,10 @@ func (m *UploadResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Msg
+
+	// no validation rules for Retcode
+
 	if len(errors) > 0 {
 		return UploadResponseMultiError(errors)
 	}
